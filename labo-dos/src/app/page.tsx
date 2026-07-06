@@ -1,61 +1,49 @@
-
-import { JSX } from "react/jsx-dev-runtime";  
+"use client";
+import { useState } from "react";
 import styles from "./page.module.css";
 
-
-interface Jugador {
-  id: number;
-  nombre: string;
-  altura: string;
-  peso: string;
-}
-
-interface Equipo {
-  id: number;
-  nombre: string;
-  plantilla: Jugador[];
-}
-
-interface EquiposProps {
-  equipos: Equipo[];
-}
-
-const Equipos = ({ equipos }: EquiposProps) => (
-  <div className={styles.container__list}>
-    <h2>Equipos de Fútbol</h2>
-    {equipos.map((equipo: Equipo) => (
-      <div key={equipo.id}>
-        <h3>{equipo.nombre}</h3>
-        <ul>
-          {equipo.plantilla.map((j: Jugador) => (
-            <li key={j.id}>
-              <strong>{j.nombre}</strong> — {j.altura}m · {j.peso}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
-  </div>
-);
-
-const equiposData: Equipo[] = [
-  { id: 1, nombre: "Real Madrid", plantilla: [
-    { id: 1, nombre: "Vinicius Jr.", altura: "1.76", peso: "73Kg" },
-    { id: 2, nombre: "Jude Bellingham", altura: "1.86", peso: "75Kg" },
-    { id: 3, nombre: "Kylian Mbappé", altura: "1.78", peso: "73Kg" },
-  ]},
-  { id: 2, nombre: "Barcelona", plantilla: [
-    { id: 1, nombre: "Lamine Yamal", altura: "1.80", peso: "67Kg" },
-    { id: 2, nombre: "Robert Lewandowski", altura: "1.85", peso: "81Kg" },
-    { id: 3, nombre: "Gavi", altura: "1.73", peso: "68Kg" },
-  ]},
-];
+type Operacion = "suma" | "resta" | "multi" | "div" | "pot" | "raiz";
 
 export default function Home() {
+  const [num1, setNum1] = useState<string>("");
+  const [num2, setNum2] = useState<string>("");
+  const [resultado, setResultado] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const calcular = (op: Operacion): void => {
+    setError(null);
+    const a = parseFloat(num1);
+    const b = parseFloat(num2);
+    if (isNaN(a) || (isNaN(b) && op !== "raiz")) {
+      setError("Ingrese números válidos"); return;
+    }
+    if (op === "div" && b === 0) {
+      setError("Error: División por cero no permitida"); return;
+    }
+    if (op === "raiz" && a < 0) {
+      setError("Error: Raíz de número negativo"); return;
+    }
+    const resultados: Record<Operacion, number> = {
+      suma: a + b, resta: a - b, multi: a * b, div: a / b,
+      pot: Math.pow(a, b), raiz: Math.sqrt(a),
+    };
+    setResultado(String(Math.round(resultados[op] * 1e10) / 1e10));
+  };
+
   return (
     <main className={styles.main}>
-      <h1>Mi Aplicación de Fútbol</h1>
-      <Equipos equipos={equiposData} />
+      <div className={styles.calculadora}>
+        <h2>Calculadora</h2>
+        <input type="number" value={num1}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNum1(e.target.value)} />
+        <input type="number" value={num2}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNum2(e.target.value)} />
+        {(["suma","resta","multi","div","pot","raiz"] as Operacion[])
+          .map(op => <button key={op} onClick={() => calcular(op)}>{op}</button>)}
+        <button onClick={() => { setNum1(""); setNum2(""); setResultado(null); setError(null); }}>Limpiar</button>
+        {resultado && <p>Resultado: {resultado}</p>}
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
     </main>
   );
 }
