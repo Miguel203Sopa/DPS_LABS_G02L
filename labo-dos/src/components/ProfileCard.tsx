@@ -1,6 +1,6 @@
 //Ejercicio.1
 // Interface: define exactamente qué props acepta este componente
-
+{/** */}
 import { JSX } from "react/jsx-runtime";
 
 interface ProfileProps {
