@@ -1,4 +1,4 @@
-//Ejercicio.3
+//Ejercicio-3
 "use client";
 import { JSX, useState } from "react";
 
