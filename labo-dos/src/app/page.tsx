@@ -1,7 +1,7 @@
 //Ejercicio-2
 
 import styles from "./page.module.css";
-import ProductList from "../components/ProductList";
+import RegisterForm from "../components/RegisterForm";
 
 
 
@@ -11,7 +11,7 @@ export default function Home() {
       <div className={styles.container}>
         <h1 className={styles.title}>Directorio de Perfiles</h1>
         <p className={styles.description}>Filtrado dinamico</p>    
-          <ProductList/>
+          <RegisterForm/>
   
       </div>
     </main>
