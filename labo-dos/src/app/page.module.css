@@ -1,88 +1,17 @@
-/* Ejercicio 4 — Tabla de Multiplicar */
 .main {
+  background-color: #f4f6f9;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: #f4f6f9;
+  padding: 40px 20px;
   font-family: 'Inter', sans-serif;
 }
-
-.main h2 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: #003f7f;
-  text-align: center;
-  border-bottom: 3px solid #fdb913;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.main label {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #1a2332;
-  margin-bottom: 0.75rem;
-}
-
-.main input {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  width: 80px;
-  text-align: center;
-  outline: none;
-}
-
-.main input:focus {
-  border-color: #003f7f;
-  box-shadow: 0 0 0 3px rgba(0,63,127,.1);
-}
-
-.main button {
-  display: block;
-  width: 100%;
-  padding: 0.65rem;
-  background: #fdb913;
-  color: #001f3f;
-  border: none;
-  border-radius: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 1rem 0;
-  transition: background .2s;
-}
-
-.main button:hover {
-  background: #c9920e;
-}
-
-.main ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.4rem;
-}
-
-.main li {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 0.45rem 0.75rem;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.82rem;
-  color: #003f7f;
-  font-weight: 500;
-}
-
-.main li:nth-child(even) {
-  background: #e6f1fb;
+.container { width: 100%; max-width: 960px; }
+.title { font-size: 1.8rem; font-weight: 800; color: #001f3f; margin-bottom: 8px; }
+.subtitle { font-size: 0.95rem; color: #5a6a7e; margin-bottom: 32px; }
+.error {
+  color: #c0392b; background: #fdf0ee;
+  border-left: 4px solid #c0392b;
+  padding: 8px 14px; border-radius: 0 6px 6px 0; font-size: 0.88rem;
 }
