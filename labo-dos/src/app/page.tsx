@@ -1,37 +1,37 @@
-"use client";
-import { useState } from "react";
+//Ejercicio-1
+
+
 import styles from "./page.module.css";
+import ProfileCard from "../components/ProfileCard";
+
+interface ProfileProps {
+  nombre: string; rol: string; tecnologias: string[];
+  avatar?: string; disponible?: boolean;
+}
+
+const perfiles: ProfileProps[] = [
+  { nombre: "Ana García", rol: "Frontend Developer",
+    tecnologias: ["React", "TypeScript", "Next.js"], disponible: true },
+  { nombre: "Carlos Mejía", rol: "Full Stack Developer",
+    tecnologias: ["Node.js", "React", "PostgreSQL"], disponible: false },
+  { nombre: "María Torres", rol: "UI/UX Designer & Dev",
+    tecnologias: ["Figma", "React", "CSS Modules"], disponible: true },
+    { nombre: "the saac", rol: "QA/Debugger",
+    tecnologias: ["JAVA E2E", "KOTLIN", "MIRA SANS DE UNDERTALE EEEEEEEEEEE"], disponible: true },
+];
 
 export default function Home() {
-  const [numero, setNumero] = useState<number>(1);
-  const [limite, setLimite] = useState<number>(10);
-  const [tabla, setTabla] = useState<string[]>([]);
-
-  const generarTabla = (): void => {
-    const resultado = Array.from(
-      { length: limite },
-      (_, i) => `${numero} × ${i + 1} = ${numero * (i + 1)}`
-    );
-    setTabla(resultado);
-  };
-
   return (
     <main className={styles.main}>
-      <h2>Tabla de Multiplicar</h2>
-      <label>
-        Número:
-        <input type="number" value={numero}
-          onChange={(e) => setNumero(parseInt(e.target.value) || 1)} />
-      </label>
-      <label>
-        Límite:
-        <input type="number" value={limite}
-          onChange={(e) => setLimite(parseInt(e.target.value) || 10)} />
-      </label>
-      <button onClick={generarTabla}>Generar Tabla</button>
-      <ul>
-        {tabla.map((item, i) => <li key={i}>{item}</li>)}
-      </ul>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Directorio de Perfiles</h1>
+        <p className={styles.subtitle}>Componentes reutilizables con props tipadas</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+          {perfiles.map((p) => (
+            <ProfileCard key={p.nombre} {...p} />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }
